@@ -6,8 +6,8 @@ import Header from "./components/Header.vue";
 <template>
     <div id="page-container">
         <div id="content-wrap">
-            <!-- <Header :text="'¡Bienvenido!'" /> -->
-            <Navbar />
+            <Header :text="'Arte Generativo'" />
+            <!-- <Navbar /> -->
             <RouterView />
         </div>
             <Footer />

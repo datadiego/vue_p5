@@ -1,20 +1,18 @@
 <script>
 import WindowComposition from "../components/WindowComposition.vue"
+import p5sketch from "../components/p5sketch.vue"
 
-import img_bio from '../assets/img_1.jfif';
-import img_about from '../assets/img_2.jfif';
-import img_contact from '../assets/img_3.jfif';
+import img from '../assets/img_1.jfif';
 
 export default {
   name: "Home",
   components: {
     WindowComposition,
+    p5sketch
   },
   data(){
         return{
-                img_bio,
-                img_about,
-                img_contact,
+                img,
             skills : [
                 {id: 1, text: "Desarrollo Web"},
                 {id: 2, text: "Robótica Industrial"},
@@ -27,8 +25,8 @@ export default {
 
 <template>
         <!-- <img class="logo" src="../assets/smiley.png" alt="logo" /> -->
-        <!-- <WindowComposition titulo="Sobre mí" texto="Soy un desarrollador web y artista digital multimedia de 32 años localizado en Granada." :imgPath="img_about" /> -->
-
+        <!-- <WindowComposition titulo="Sobre mí" texto="Soy un desarrollador web y artista digital multimedia de 32 años localizado en Granada." :imgPath="img" /> -->
+        <p5sketch />
 </template>
 
 <script>
