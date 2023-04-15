@@ -1,47 +1,42 @@
 <template>
 <div class="container">
-    <h1 class="titulo">* Contador</h1>
+    <h1 class="titulo">* {{ titulo }}</h1>
+  <div id="canvas" ref="p5Canvas"></div>
     <div class="info">
-    <p class="entrada">Cols: {{ cols }}</p>
-        <button @click="incrementCols">+</button>
-        <button @click="decrementCols">-</button>
+        <p class="entrada">AAAA</p>
 
-    </div>
-    <div class="info">
-    <p class="entrada">Rows: {{ rows }}</p>
-        <button @click="incrementRows">+</button>
-        <button @click="decrementRows">-</button>
 
     </div>
 </div>
 </template>
-
 <script>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue';
+import p5 from 'p5';
 
 export default {
   setup() {
-    const cols = ref(0)
-    const rows = ref(0)
-    const incrementCols = () => {
-        cols.value++
-    }
+    const p5Canvas = ref(null);
 
-    const decrementCols = () => {
-        cols.value--
-    }
+    onMounted(() => {
+      new p5((p) => {
+        
+        p.setup = () => {
+          p.createCanvas(400, 400);
+          p.background(255);
+          p.fill(255);
+          p.rectMode(p.CENTER)
+          p.rect(200, 200, 100, 100)
+        };
 
-    const incrementRows = () => {
-        rows.value++
-    }
+        p.draw = () => {
+          p.ellipse(p.mouseX, p.mouseY, 50, 50);
+        };
+      }, p5Canvas.value);
+    });
 
-    const decrementRows = () => {
-        rows.value--
-    }
-
-    return { rows, cols, incrementRows, decrementRows, incrementCols, decrementCols }
-  }
-}
+    return { p5Canvas };
+  },
+};
 </script>
 
 <style scoped>
@@ -49,24 +44,28 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 30%;
+    width: 50vw;
     border: 3px solid var(--border);
     border-radius: 16px;
     margin: 0 auto;
+    box-shadow: 15px 15px var(--shadow);
     margin-top: 1vw;
     margin-bottom: 5vw;
-    padding-bottom: 2vw;
-    background-color: var(--infoBack);
 }
 .titulo{
-    font-size: 2vw;
+    font-size: 2.5vw;
     margin: 0;
     padding:1vw;
     background-color: var(--titlesBack);
     color: var(--titlesFront);
     border-bottom: 3px solid var(--border);
 }
-
+.entrada{
+    font-size: 1.4vw;
+    margin: 0;
+    padding: 3vw;
+    color: var(--text);
+}
 img{
     width: 200px;
     height: auto;
@@ -77,24 +76,16 @@ img{
 }
 .info{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     background-color: var(--infoBack);
-    padding: 0;
-    padding-top: 3vw;
 }
-button{
-    margin-left: 2vw;
-    width: 3vw;
-    height: 2vw;
-    font-size: 2vw;
-    text-align: center;
+
+#canvas{
+    background-color: var(--infoBack);
+    display: flex;
+    justify-content: center;
 }
-    p.entrada{
-    width: 10vw;
-        margin: 0;
-        margin-left: 4vw;
-    }
 @media screen and (max-width: 1000px) {
     .container{
         margin-top: 5vw;
@@ -105,8 +96,10 @@ button{
     .titulo{
         font-size: 6vw;
     }
-
-
+    .entrada{
+        padding: 5vw;
+        font-size: 3vw;
+    }
 
     img{
         width: 30vw;
